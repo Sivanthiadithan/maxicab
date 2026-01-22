@@ -1,0 +1,192 @@
+/* Banner Slider Styles */
+.banner-slider {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: clamp(600px, 90vh, 900px); /* responsive height */
+}
+
+/* Hardcoded Dark Theme Variables */
+:root {
+  --banner-kicker: #c5a059;
+  --banner-title: #ffffff;
+  --banner-desc: rgba(255, 255, 255, 0.9);
+  --banner-overlay-start: rgba(0, 0, 0, 0.8);
+  --banner-overlay-end: transparent;
+}
+
+.banner-slider .slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  background-size: cover;
+  background-position: center;
+}
+.banner-slider .slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.theme-overlay {
+  background: linear-gradient(to right, var(--banner-overlay-start), var(--banner-overlay-end)) !important;
+}
+
+/* Banner Content Overlay */
+.banner-content-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.banner-content-overlay > div {
+  pointer-events: auto;
+}
+
+/* Animation for slide content when active */
+.slide .slide-content > *,
+.hero-content-slide > * {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.hero-content-slide.hidden {
+  display: none !important;
+}
+
+.hero-content-slide:not(.hidden) {
+  display: block !important;
+  opacity: 1 !important;
+}
+
+/* Staggered entrance */
+.slide.active .banner-kicker { transition-delay: 0.2s; }
+.slide.active .banner-title { transition-delay: 0.4s; }
+.slide.active .banner-description { transition-delay: 0.6s; }
+.slide.active .banner-btns { transition-delay: 0.8s; }
+
+/* Banner Content Styles */
+.banner-kicker {
+  display: block;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  color: var(--banner-kicker);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.banner-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  color: var(--banner-title);
+  line-height: 1.1;
+  margin-bottom: 30px;
+  letter-spacing: -0.02em;
+}
+
+.banner-description {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--banner-desc);
+  max-width: 650px;
+  line-height: 1.6;
+  margin-bottom: 45px;
+  font-weight: 400;
+}
+
+.banner-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Enhanced Button Styles */
+.btn-banner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 45px;
+  border-radius: 100px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  font-size: 16px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-red {
+  background: linear-gradient(135deg, #990000 0%, #cc0000 100%);
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(153, 0, 0, 0.2);
+}
+
+.btn-red::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.4s;
+}
+
+.btn-red:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(153, 0, 0, 0.4);
+}
+
+.btn-red:hover::before {
+  opacity: 1;
+}
+
+.btn-white {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-white:hover {
+  background: #fff;
+  color: #000;
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
+}
+
+/* Navigation arrows */
+.banner-slider .nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 54px;
+  height: 54px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  z-index: 10;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.banner-slider .nav-arrow:hover {
+  background: rgba(255, 255, 255, 0.4);
+  color: #000;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.banner-slider .prev { left: 30px; }
+.banner-slider .next { right: 30px; }
